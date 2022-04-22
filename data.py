@@ -105,8 +105,8 @@ class Data():
 		f = open(triple_files, 'r')
 		triples = []
 		for line in f.readlines():
-			h, t, r = line.strip().split('\t')
-			#h, r, t = line.strip().split('\t')
+			# h, t, r = line.strip().split('\t')
+			h, r, t = line.strip().split('\t')
 			self.entities.add(h)
 			self.entities.add(t)
 			self.relations.add(r)
@@ -889,7 +889,7 @@ class Data():
 	def negative_triple_generator(self, input_postive_queue, output_queue):
 		while True:
 			dat = input_postive_queue.get()
-			if dat == None:
+			if dat.all() == None:
 				break
 			positive = np.asarray(dat)
 			replace_h, replace_t = [np.random.randint(self.num_entity, size=len(positive)*self.neg_samples) for i in range(2)]
